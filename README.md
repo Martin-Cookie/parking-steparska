@@ -57,11 +57,38 @@ Za pár sekund web běží na adrese typu `parking-steparska.vercel.app`.
 
 ### Připojení vlastní domény
 
-Ve Vercelu **Settings → Domains** přidejte `parking-steparska.cz`
-i `www.parking-steparska.cz`. Vercel vypíše, co nastavit u registrátora domény
-(obvykle `A` záznam na `76.76.21.21` pro doménu bez www a `CNAME` na
-`cname.vercel-dns.com` pro www). HTTPS certifikát Vercel vyřídí sám — starý web
-běžel jen na `http://`, nový bude na `https://`.
+Doména `parking-steparska.cz` je vedená u **Wedosu** a na stejné doméně běží
+i e-mail (MX záznamy míří na `wes1-mx1.wedos.net`).
+
+> **⚠️ Nepřepínejte nameservery na Vercel.** Vercel to nabízí jako
+> jednodušší cestu, ale převzal by celé DNS včetně MX záznamů — a e-mail na
+> téhle doméně by přestal fungovat. DNS musí zůstat u Wedosu, měnit se budou
+> jen jednotlivé záznamy pro web.
+
+Ve Vercelu **Settings → Domains** přidejte `www.parking-steparska.cz`
+(hlavní) a `parking-steparska.cz` (přesměruje se na www). Vercel u každé
+vypíše konkrétní hodnoty — **opište je z obrazovky**, nespoléhejte na hodnoty
+odjinud: `CNAME` pro www je pro každý projekt jiný (třeba
+`d1d4fc829fe7bc7c.vercel-dns-017.com`), zatímco `A` záznam pro doménu bez www
+bývá `76.76.21.21`.
+
+V administraci Wedosu se pak u záznamů pro web udělá tohle:
+
+| Záznam | Teď | Nově |
+|---|---|---|
+| `A` pro `parking-steparska.cz` | `46.28.105.157` | hodnota z Vercelu (`76.76.21.21`) |
+| `AAAA` pro `parking-steparska.cz` | `2a02:2b88:1:4::143` | **smazat** |
+| `A` pro `www` | `46.28.105.157` | **smazat** |
+| `AAAA` pro `www` | `2a02:2b88:1:4::143` | **smazat** |
+| `CNAME` pro `www` | neexistuje | přidat, cíl z Vercelu |
+| `MX` (pošta) | Wedos | **nechat být** |
+
+Na `AAAA` záznamy se snadno zapomene. Kdyby zůstaly, návštěvníci s IPv6
+připojením by pořád viděli starý web, zatímco ostatní už nový — a hledal
+byste chybu tam, kde není.
+
+HTTPS certifikát Vercel vyřídí sám. Starý web běžel jen na `http://`, nový
+bude na `https://`.
 
 ---
 
