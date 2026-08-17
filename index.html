@@ -8,9 +8,10 @@
 <meta name="description" content="Pronájem parkovacích míst na hlídaném parkovišti u Albertu, Štěpařská 1098/22, Praha 5. Nonstop přístup, kamerový dohled, parkovací zábrany. Od 1 550 Kč měsíčně.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.parking-steparska.cz/">
-<link rel="alternate" hreflang="cs" href="https://www.parking-steparska.cz/">
-<link rel="alternate" hreflang="en" href="https://www.parking-steparska.cz/?lang=en">
-<link rel="alternate" hreflang="x-default" href="https://www.parking-steparska.cz/">
+<!-- Odkazy hreflang tu záměrně nejsou. Anglická a ukrajinská verze se
+     překládají až v prohlížeči, takže na adrese ?lang=en i ?lang=ua najde
+     vyhledávač češtinu. Slibovat mu samostatné jazykové verze, které
+     neexistují, by webu spíš uškodilo. -->
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
@@ -49,17 +50,30 @@
       <a href="#fotky" data-i18n="nav.photos">Fotky</a>
       <a href="#kde" data-i18n="nav.location">Kde to je</a>
       <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+
+      <!-- Druhý přepínač jazyka, jen pro rozbalovací menu na telefonu.
+           Do hlavičky se tři tlačítka vedle loga a telefonu nevejdou.
+           Skript obsluhuje oba naráz, takže se nemůžou rozejít. -->
+      <div class="lang lang--menu" role="group" aria-label="Jazyk / Language / Мова">
+        <button type="button" data-lang="cs" aria-pressed="true" lang="cs">CZ</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+        <button type="button" data-lang="ua" aria-pressed="false" lang="uk">UA</button>
+      </div>
     </nav>
 
     <div class="header__actions">
-      <div class="lang" role="group" aria-label="Jazyk / Language">
-        <button type="button" data-lang="cs" aria-pressed="true">CZ</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <div class="lang" role="group" aria-label="Jazyk / Language / Мова">
+        <button type="button" data-lang="cs" aria-pressed="true" lang="cs" title="Česky">CZ</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en" title="English">EN</button>
+        <button type="button" data-lang="ua" aria-pressed="false" lang="uk" title="Українською">UA</button>
       </div>
 
-      <a class="btn btn--sm btn--phone" href="tel:+420775259253">
+      <!-- Na tabletu se číslo skryje a zůstane jen ikona, jinak by se
+           hlavička se třemi jazyky nevešla. Proto aria-label. -->
+      <a class="btn btn--sm btn--phone" href="tel:+420775259253"
+         aria-label="Zavolat na +420 775 259 253">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        775 259 253
+        <span class="btn__label">775 259 253</span>
       </a>
 
       <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">

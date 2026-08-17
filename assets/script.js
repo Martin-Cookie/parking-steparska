@@ -26,14 +26,31 @@
   phNodes.forEach(function (el) { CS[el.dataset.i18nPlaceholder] = el.placeholder; });
   Object.keys(CS_RUNTIME).forEach(function (k) { CS[k] = CS_RUNTIME[k]; });
 
+  /* Cizojazyčné slovníky. Čeština tu není — bere se z HTML (viz výš).
+     Přidání dalšího jazyka = nový slovník v i18n.js, řádek sem
+     a tlačítko do přepínače v index.html. */
+  var DICTS = {
+    en: EN,
+    ua: window.I18N_UA || {}
+  };
+
+  /* Kód jazyka pro atribut lang na <html>. Liší se od kódu v přepínači:
+     „UA“ je zkratka země, jazyk se podle normy značí „uk“. Na tom závisí
+     dělení slov i výslovnost ve čtečkách pro nevidomé. */
+  var HTML_LANG = { cs: "cs", en: "en", ua: "uk" };
+
+  function dictFor(code) {
+    return (code === "cs") ? CS : (DICTS[code] || CS);
+  }
+
   function t(key) {
-    var dict = lang === "en" ? EN : CS;
+    var dict = dictFor(lang);
     return (key in dict) ? dict[key] : (CS[key] || key);
   }
 
   function setLang(next, pushUrl) {
-    lang = (next === "en") ? "en" : "cs";
-    var dict = lang === "en" ? EN : CS;
+    lang = (next === "cs" || DICTS[next]) ? next : "cs";
+    var dict = dictFor(lang);
 
     textNodes.forEach(function (el) {
       var v = dict[el.dataset.i18n];
@@ -44,7 +61,7 @@
       if (v) { el.placeholder = v; }
     });
 
-    doc.documentElement.lang = lang;
+    doc.documentElement.lang = HTML_LANG[lang] || lang;
     if (dict["meta.title"]) { doc.title = dict["meta.title"]; }
     var md = $('meta[name="description"]');
     if (md && dict["meta.desc"]) { md.content = dict["meta.desc"]; }
@@ -57,8 +74,8 @@
 
     if (pushUrl && window.history && history.replaceState) {
       var url = new URL(window.location.href);
-      if (lang === "en") { url.searchParams.set("lang", "en"); }
-      else { url.searchParams.delete("lang"); }
+      if (lang === "cs") { url.searchParams.delete("lang"); }
+      else { url.searchParams.set("lang", lang); }
       history.replaceState(null, "", url.toString());
     }
   }
@@ -113,11 +130,12 @@
     b.addEventListener("click", function () { setLang(b.dataset.lang, true); });
   });
 
-  // Jazyk z adresy při načtení
+  // Jazyk z adresy při načtení (?lang=en, ?lang=ua). Přijímáme i „uk“,
+  // protože tak se ukrajinština značí podle normy a někdo ji tak může napsat.
   try {
-    if (new URLSearchParams(window.location.search).get("lang") === "en") {
-      setLang("en", false);
-    }
+    var want = (new URLSearchParams(window.location.search).get("lang") || "").toLowerCase();
+    if (want === "uk") { want = "ua"; }
+    if (DICTS[want]) { setLang(want, false); }
   } catch (e) { /* starý prohlížeč — zůstane čeština */ }
 
   // První vykreslení počtu volných míst (setLang se výše nemusel spustit).

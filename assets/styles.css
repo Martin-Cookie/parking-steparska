@@ -273,6 +273,9 @@ h3 { font-size: 1.12rem; }
   box-shadow: var(--shadow-sm);
 }
 
+/* Kopie přepínače v rozbalovacím menu — na širokých obrazovkách se neukazuje */
+.lang--menu { display: none; }
+
 .nav-toggle {
   display: none;
   width: 40px; height: 40px;
@@ -825,6 +828,21 @@ h3 { font-size: 1.12rem; }
   .nav.is-open a { padding: 12px 14px; font-size: 1rem; }
   .nav-toggle { display: grid; place-items: center; }
   .header__actions .btn--phone { display: none; }
+
+  /* Tři jazyky se do hlavičky telefonu nevejdou — přepínač se přesune
+     do rozbalovacího menu, kde je na něj místo. */
+  .header__actions .lang { display: none; }
+  .nav.is-open .lang--menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    background: none;
+    border-left: 0; border-right: 0; border-bottom: 0;
+  }
+  .nav.is-open .lang--menu button { flex: 1; }
   .form { padding: 24px 20px 26px; }
   .callbar { display: flex; }
   body { padding-bottom: 84px; }
@@ -858,6 +876,17 @@ h3 { font-size: 1.12rem; }
     padding: 12px 10px;
     margin: -6px 0 -6px -10px;
   }
+}
+
+/* Tablet: hlavička se třemi jazyky je nabitá, tak z telefonu zůstane
+   jen ikona. Musí být až za blokem pro dotyk výš, aby ho přebilo.
+   Číslo zůstává dostupné přes aria-label i v úvodním bloku stránky. */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .header__inner { gap: 12px; }
+  .btn--phone { padding: 12px; }
+  .btn--phone .btn__label { display: none; }
+  .btn--phone svg { width: 18px; height: 18px; }
+  .nav a { padding: 8px 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
