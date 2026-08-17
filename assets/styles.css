@@ -624,7 +624,10 @@ h3 { font-size: 1.12rem; }
   background: var(--bg);
   color: var(--ink);
   font: inherit;
-  font-size: .96rem;
+  /* NESNIŽOVAT pod 16px: Safari na iPhonu při kliknutí do menšího
+     políčka automaticky přiblíží celou stránku a návštěvník pak
+     musí ručně oddalovat. */
+  font-size: 1rem;
   transition: border-color .16s ease, box-shadow .16s ease;
 }
 .field textarea { min-height: 108px; resize: vertical; }
@@ -688,6 +691,8 @@ h3 { font-size: 1.12rem; }
 .footer a { color: var(--ink-2); text-decoration: none; }
 .footer a:hover { color: var(--brand-dark); text-decoration: underline; }
 .footer__links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.footer__id strong { color: var(--ink); }
+.footer__tel { white-space: nowrap; }
 
 /* --- Lightbox ------------------------------------------------------------ */
 
@@ -754,6 +759,28 @@ h3 { font-size: 1.12rem; }
   .map iframe { height: 340px; }
 }
 
+/* Jen telefony — na tabletu se galerie i dvojice políček ve formuláři
+   vejdou vedle sebe, plná šířka by tam byla plýtvání místem. */
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; }
+  .form__row { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* Tablety na výšku (iPad mini až iPad Pro).
+   Bez tohoto bloku se ceník lámal do jednoho sloupce už pod 1000 px, takže
+   na iPadu byly karty roztažené přes celou šířku a stránka o polovinu delší. */
+@media (min-width: 680px) and (max-width: 1000px) {
+  .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .plan { padding: 26px 19px 28px; }
+  .plan--featured { order: 0; }          /* zruší přeskládání z mobilu */
+  .plan__amount { font-size: 2.05rem; }
+  .plan__unit { font-size: .84rem; }
+  .plan__price { gap: 5px; }
+  .plan__note { font-size: .88rem; min-height: 4.6em; }
+  .plan__list li { font-size: .87rem; padding: 4px 0; }
+  .plan__flag { left: 19px; }
+}
+
 @media (max-width: 760px) {
   body { font-size: 16.5px; }
   .section { padding: 62px 0; }
@@ -775,13 +802,39 @@ h3 { font-size: 1.12rem; }
   .nav.is-open a { padding: 12px 14px; font-size: 1rem; }
   .nav-toggle { display: grid; place-items: center; }
   .header__actions .btn--phone { display: none; }
-  .gallery { grid-template-columns: 1fr; }
   .form { padding: 24px 20px 26px; }
-  .form__row { grid-template-columns: 1fr; gap: 0; }
   .callbar { display: flex; }
   body { padding-bottom: 84px; }
   .footer { padding-bottom: 40px; }
   .hero__cta .btn { flex: 1 1 100%; }
+}
+
+/* --- Dotyková zařízení ---------------------------------------------------
+   Platí pro telefony i tablety bez ohledu na šířku okna. Prstem se míří
+   hůř než myší, proto všechny klikací prvky zvětšíme na 44 px podle
+   doporučení Apple i Googlu.
+   ------------------------------------------------------------------------ */
+
+@media (pointer: coarse) {
+  .lang button { padding: 10px 14px; font-size: .84rem; }
+  .nav-toggle  { width: 44px; height: 44px; }
+  .brand       { padding-block: 4px; }
+  .btn--sm     { padding: 12px 18px; }
+
+  .nav a { padding: 11px 12px; }
+
+  /* Odkazy v zápatí měly jen 24 px na výšku — prstem se do nich mířilo těžko */
+  .footer__links { gap: 2px 14px; }
+  .footer__links a { display: block; padding: 10px 8px; margin-inline: -8px; }
+
+  .contact-lines a { padding: 17px 18px; }
+
+  /* Telefon v zápatí byl 16 px vysoký — prstem se do něj mířilo naslepo */
+  .footer__tel {
+    display: inline-block;
+    padding: 12px 10px;
+    margin: -6px 0 -6px -10px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
