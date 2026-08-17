@@ -53,8 +53,8 @@ window.I18N_EN = {
   "f2.text": "Come and go whenever you like — day or night, weekends and public holidays included. No opening hours, no attendant.",
   "f3.title": "CCTV surveillance",
   "f3.text": "The whole car park is covered by cameras. The recording helps trace any incident and discourages damage to your car.",
-  "f4.title": "Parking barriers",
-  "f4.text": "Each space comes with a lockable barrier against unauthorised parking. Your space stays free even if you arrive late in the evening.",
+  "f4.title": "Numbered space with a barrier",
+  "f4.text": "Every space has its own number and its own lockable barrier. Your space stays free even if you arrive late in the evening.",
 
   /* --- ceník --- */
   "price.eyebrow": "Pricing",

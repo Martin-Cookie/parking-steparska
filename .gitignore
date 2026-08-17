@@ -1,5 +1,9 @@
 node_modules/
 .vercel
+
+# Originály fotek z telefonu — do gitu nepatří (velké a s GPS souřadnicemi).
+# Na webu se používají zmenšené verze v images/.
+_fotky-originaly/
 .env
 .env.*
 !.env.example

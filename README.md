@@ -97,37 +97,79 @@ bude na `https://`.
 Formulář posílá data na `/api/contact`, což je funkce v `api/contact.js`.
 Aby opravdu odesílala e-maily, potřebuje tři proměnné prostředí.
 
-1. Zaregistrujte se na [resend.com](https://resend.com) — free tarif zvládne
-   3 000 e-mailů měsíčně, na poptávky víc než dost.
-2. V Resendu přidejte a ověřte doménu `parking-steparska.cz`
-   (přidáte pár DNS záznamů, které Resend vypíše).
-3. Vytvořte **API Key** a zkopírujte ho.
-4. Ve Vercelu **Settings → Environment Variables** přidejte:
+**Dokud je nenastavíte**, formulář návštěvníkovi ukáže hlášku „Poptávku se
+nepodařilo odeslat, zavolejte prosím na +420 775 259 253“. Web funguje
+i bez toho, jen se poptávky neodesílají — telefon zůstává hlavní cesta.
+
+### Rychlá varianta — bez zasahování do DNS
+
+Tohle je cesta pro případ, kdy DNS domény spravuje někdo jiný nebo se do nich
+nechcete pouštět.
+
+1. Zaregistrujte se na [resend.com](https://resend.com) **e-mailem, na který
+   chcete poptávky dostávat** — tady `079114@gmail.com`. Na té adrese to
+   závisí, viz upozornění níž. Free tarif zvládne 3 000 e-mailů měsíčně.
+2. Vytvořte **API Key** a zkopírujte ho (`re_…`).
+3. Ve Vercelu **Settings → Environment Variables** přidejte:
 
    | Název | Hodnota |
    |---|---|
    | `RESEND_API_KEY` | klíč z Resendu (`re_…`) |
-   | `CONTACT_TO` | e-mail, kam mají poptávky chodit |
-   | `CONTACT_FROM` | např. `web@parking-steparska.cz` (ověřená doména) |
+   | `CONTACT_TO` | `079114@gmail.com` |
+   | `CONTACT_FROM` | `onboarding@resend.dev` |
 
-5. **Deployments → … → Redeploy**, aby se proměnné načetly.
+4. **Deployments → poslední nasazení → … → Redeploy**, aby se proměnné načetly.
+   Bez tohohle kroku se nové proměnné nepoužijí.
 
-**Dokud to nenastavíte**, formulář návštěvníkovi ukáže hlášku „Poptávku se
-nepodařilo odeslat, zavolejte prosím na +420 775 259 253“. Web tedy funguje
-i bez toho, jen se poptávky neodesílají — telefon zůstává hlavní cesta.
+> **⚠️ Omezení téhle varianty.** Odesílatel `onboarding@resend.dev` je testovací
+> adresa Resendu a smí posílat **jen na e-mail, kterým je účet registrovaný**.
+> Když v `CONTACT_TO` uvedete jinou adresu, Resend odpoví chybou 403 a poptávka
+> nedojde. Takže obě adresy musí být stejné. Kdybyste chtěl poptávky posílat
+> ještě někomu dalšímu nebo na adresu na vlastní doméně, je potřeba varianta níž.
 
-### Jednodušší varianta bez Resendu
+Zkontrolujte po prvním odeslání i **spam**. Doména `resend.dev` je společná pro
+všechny, kdo ji testují, takže první zpráva tam někdy spadne. Označte ji jako
+„není spam“ a příště už přijde normálně.
 
-Pokud se nechcete zdržovat s ověřováním domény, jde použít
-[Formspree](https://formspree.io). Založíte formulář, dostanete adresu jako
+### Plná varianta — s vlastní doménou
+
+Vypadá profesionálněji (odesílatel `web@parking-steparska.cz` místo
+`onboarding@resend.dev`), lépe se doručuje a poptávky můžou chodit na víc
+adres. Vyžaduje ale přístup k DNS.
+
+1. V Resendu **Domains → Add Domain** → `parking-steparska.cz`.
+2. Resend vypíše několik `TXT` a `CNAME` záznamů (DKIM a SPF). Ty se přidají
+   u Wedosu — viz varování o MX záznamech v části 2, pošta se tím nesmí
+   rozbít. Na doméně teď žádný `SPF` ani `DMARC` záznam není, takže není
+   s čím kolidovat.
+3. Po ověření změňte ve Vercelu `CONTACT_FROM` na `web@parking-steparska.cz`
+   a `CONTACT_TO` může být libovolná adresa. Znovu **Redeploy**.
+
+### Ještě jednodušší varianta bez Resendu
+
+[Formspree](https://formspree.io) — založíte formulář, dostanete adresu jako
 `https://formspree.io/f/abcdwxyz` a v `assets/script.js` nahradíte jeden řádek:
 
 ```js
-fetch("/api/contact", {          // ← původní
-fetch("https://formspree.io/f/abcdwxyz", {   // ← nové
+fetch("/api/contact", {                        // ← původní
+fetch("https://formspree.io/f/abcdwxyz", {     // ← nové
 ```
 
-Soubor `api/contact.js` pak můžete smazat.
+Soubor `api/contact.js` pak můžete smazat. Nevýhoda: poptávky procházejí
+přes službu třetí strany a free tarif má nižší limit.
+
+### Ověření, že funkce vůbec žije
+
+```bash
+curl -i -X POST https://parking-steparska.vercel.app/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test","phone":"+420777123456"}'
+```
+
+- `503` a `{"error":"not_configured"}` → funkce běží, jen chybí proměnné
+- `422` a `{"error":"missing_fields"}` → funkce běží a validuje
+- `200` a `{"ok":true}` → odesláno, koukněte do e-mailu
+- `404` → funkce se nenasadila, zkontrolujte, že soubor je v `api/contact.js`
 
 ---
 

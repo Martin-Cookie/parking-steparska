@@ -1,33 +1,45 @@
 # Fotky parkoviště
 
-Do této složky patří tři soubory. Web se na ně odkazuje přesně těmito názvy:
+| Soubor | Kde se zobrazí | Rozměr |
+|---|---|---|
+| `parking1.jpg` | velké foto v úvodu + první v galerii | 1280 × 960 |
+| `parking2.jpg` | galerie — detail zábran s čísly míst | 1280 × 960 |
+| `parking3.jpg` | galerie — pohled z výšky | 1280 × 960 |
+| `og.jpg` | náhled při sdílení na Facebooku a jinde | 1200 × 630 |
 
-| Soubor         | Kde se zobrazí                      | Doporučený rozměr        |
-|----------------|-------------------------------------|--------------------------|
-| `parking1.jpg` | velké foto v úvodu + galerie + náhled při sdílení | šířka 1600 px, formát na šířku |
-| `parking2.jpg` | galerie                             | šířka 1600 px            |
-| `parking3.jpg` | galerie                             | šířka 1600 px            |
+Dohromady necelý 1,2 MB. Kdyby soubory chyběly, web místo nich ukáže jemné
+zástupné plochy — layout se nerozsype.
 
-Dokud tu soubory nejsou, web místo fotek ukáže jemné zástupné plochy — layout
-se nerozsype, jen budou místo fotek světlé bloky.
+## Když budete chtít fotky vyměnit
 
-## Na co si dát pozor
+Nedávejte na web fotku přímo z telefonu. Má typicky 4000–6000 px a 5–7 MB,
+což stránku citelně zpomalí, a hlavně:
 
-- **Zmenšit před nahráním.** Fotka z telefonu má klidně 4000 px a 5 MB, což web
-  hodně zpomalí. Stačí šířka 1600 px a kvalita JPEG okolo 80 % — soubor
-  by měl mít pod 400 kB.
-- **Zachovat názvy** `parking1.jpg`, `parking2.jpg`, `parking3.jpg`. Když je
-  změníte, upravte i odkazy v `index.html`.
-- **Co vyfotit:** celkový pohled na parkoviště, vjezd s orientačním bodem
-  (Albert) a detail parkovací zábrany. Ideálně za denního světla, ne v šeru.
+> **⚠️ Fotky z telefonu obsahují GPS souřadnice místa, kde byly vyfoceny.**
+> U snímku z okna bytu to znamená zveřejnit vlastní adresu. Fotky v této
+> složce už jsou vyčištěné — neobsahují GPS ani údaje o přístroji.
 
-## Jak fotky zmenšit
-
-**macOS (Náhled):** otevřít fotku → Nástroje → Upravit velikost → šířka 1600 →
-Soubor → Exportovat → JPEG, kvalita cca 80 %.
-
-**Přes příkazovou řádku (ImageMagick):**
+Před nahráním tedy fotku zmenšete **a zbavte metadat**:
 
 ```bash
-magick parking1.jpg -resize 1600x -quality 82 -strip parking1.jpg
+# ImageMagick — zmenší na 1280 px a -strip odstraní všechna metadata včetně GPS
+magick original.jpg -resize 1280x -quality 82 -strip parking1.jpg
 ```
+
+Na macOS bez ImageMagicku:
+
+```bash
+sips --resampleWidth 1280 original.jpg --out parking1.jpg
+```
+
+`sips` ale metadata nemaže. Buď použijte `exiftool -all= parking1.jpg`, nebo
+v Náhledu udělejte Soubor → Exportovat a odškrtněte zachování údajů o poloze.
+
+Nejjednodušší je poslat mi originály a nechat to na mně.
+
+## Co vyfotit, kdyby přišly nové
+
+Nejlíp funguje trojice: celkový pohled na parkoviště, detail zábrany s číslem
+místa (to je dobrý argument — je vidět, že místo je konkrétní a vaše)
+a záběr, ze kterého je poznat okolí a orientační bod. Ideálně za denního
+světla, ne v šeru.
