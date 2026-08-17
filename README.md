@@ -239,6 +239,23 @@ git push
 
 Vercel nasadí novou verzi sám, do půl minuty.
 
+### Když změnu nevidíte
+
+Soubory `assets/styles.css` a `assets/script.js` mají v `vercel.json` nastavené
+`max-age=0, must-revalidate`. To znamená, že se prohlížeč pokaždé zeptá
+serveru, jestli se soubor změnil — když ne, dostane krátkou odpověď „beze
+změny" a použije uloženou kopii. Změny se tedy projeví hned a přenáší se
+jen to, co je opravdu nové.
+
+Fotky v `images/` mají cache na jeden den, protože se mění zřídka a jsou
+velké. **Když vyměníte fotku pod stejným názvem, může ji návštěvník, který už
+na webu byl, vidět starou až 24 hodin.** Chcete-li ji prosadit hned, uložte ji
+pod jiným názvem (`parking1b.jpg`) a přepište odkaz v `index.html`.
+
+Když změnu nevidíte ani po tvrdém obnovení (**Cmd + Shift + R** na macOS,
+**Ctrl + F5** na Windows), zkontrolujte ve Vercelu v **Deployments**, jestli
+nasazení opravdu proběhlo a je označené jako `Current`.
+
 ---
 
 ## 6. Lokální náhled
