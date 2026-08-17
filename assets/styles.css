@@ -76,6 +76,29 @@ h1, h2, h3, h4 {
 }
 
 p { margin: 0; text-wrap: pretty; }
+
+/* --- Zarovnání textu do bloku --------------------------------------------
+   Justify a dělení slov musí jít vždycky ruku v ruce. Kdyby se text zarovnal
+   do bloku bez dělení, čeština by kvůli dlouhým slovům vytvořila mezi slovy
+   široké „řeky“ bílého místa — dopadlo by to hůř než zarovnání na levý kraj.
+   Dělení funguje díky atributu lang="cs" na <html>, který si skript přepíná
+   podle zvoleného jazyka, takže po přepnutí na EN se dělí anglicky.
+
+   Nadpisy záměrně zarovnané nejsou — u velkého písma na málo řádcích
+   by mezery vynikly nejvíc a dělená slova v nadpisu působí rušivě.
+   ------------------------------------------------------------------------ */
+.hero__lead,
+.lead,
+.card p,
+.plan__note,
+.plans-foot span,
+.form__fine {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  /* nedělit slova krátší než 6 znaků a nenechávat na řádku méně než 3 znaky */
+  hyphenate-limit-chars: 6 3 3;
+}
 ul { margin: 0; padding: 0; list-style: none; }
 
 a { color: var(--brand-dark); text-decoration-thickness: 1px; text-underline-offset: 2px; }
