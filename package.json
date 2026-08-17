@@ -1,0 +1,8 @@
+{
+  "name": "parking-steparska",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web parkoviště Štěpařská 1098/22, Praha 5 — pronájem parkovacích míst",
+  "type": "module",
+  "license": "UNLICENSED"
+}
