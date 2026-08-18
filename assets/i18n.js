@@ -10,7 +10,7 @@
 window.I18N_EN = {
   /* --- meta --- */
   "meta.title": "Parking spaces for rent — Štěpařská, Prague 5 | Parking Štěpařská",
-  "meta.desc": "Parking spaces for rent at a monitored car park by the Albert supermarket, Štěpařská 1098/22, Prague 5. 24/7 access, CCTV, parking barriers. From CZK 1,550 per month.",
+  "meta.desc": "Parking spaces for rent at a car park by the Albert supermarket, Štěpařská 1098/22, Prague 5. 24/7 access, CCTV, parking barriers. From CZK 1,550 per month.",
 
   /* --- hlavička --- */
   "brand.sub": "Prague 5 — Barrandov",
@@ -38,7 +38,7 @@ window.I18N_EN = {
   "form.ok.full":       "Thank you — you are on the waiting list. We will be in touch as soon as a space frees up.",
 
   "hero.title": "Your own parking space in Barrandov, right by the Albert supermarket",
-  "hero.lead": "A monitored car park on Štěpařská street with 24/7 access, CCTV and lockable parking barriers. No more circling the neighbourhood looking for a spot — your space is always free.",
+  "hero.lead": "A car park on Štěpařská street with 24/7 access, CCTV and lockable parking barriers. No more circling the neighbourhood looking for a spot — your space is always free.",
   "cta.inquiry": "Enquire — no obligation",
   "chip.label": "Prices from",
   "unit.monthShort": "CZK / month",
@@ -136,7 +136,7 @@ window.I18N_EN = {
 window.I18N_UA = {
   /* --- meta --- */
   "meta.title": "Паркувальні місця в оренду — Прага 5, Штєпаржська | Parking Štěpařská",
-  "meta.desc": "Оренда паркувальних місць на охоронюваному паркінгу біля супермаркету Albert, Štěpařská 1098/22, Прага 5. Цілодобовий доступ, відеоспостереження, паркувальні бар'єри. Від 1 550 Kč на місяць.",
+  "meta.desc": "Оренда паркувальних місць на паркінгу біля супермаркету Albert, Štěpařská 1098/22, Прага 5. Цілодобовий доступ, відеоспостереження, паркувальні бар'єри. Від 1 550 Kč на місяць.",
 
   /* --- шапка --- */
   "brand.sub": "Прага 5 — Баррандов",
@@ -164,7 +164,7 @@ window.I18N_UA = {
   "form.ok.full":       "Дякуємо, ви в черзі. Ми зв'яжемося, щойно місце звільниться.",
 
   "hero.title": "Власне паркувальне місце на Баррандові, поруч із Albert",
-  "hero.lead": "Охоронюваний паркінг на вулиці Štěpařská з цілодобовим доступом, відеоспостереженням і паркувальними бар'єрами. Більше не треба кружляти районом у пошуках місця — ваше місце завжди вільне.",
+  "hero.lead": "Паркінг на вулиці Štěpařská з цілодобовим доступом, відеоспостереженням і паркувальними бар'єрами. Більше не треба кружляти районом у пошуках місця — ваше місце завжди вільне.",
   "cta.inquiry": "Залишити заявку",
   "chip.label": "Ціна від",
   "unit.monthShort": "Kč / місяць",
@@ -274,5 +274,5 @@ window.I18N_CS_RUNTIME = {
   "form.errEmail": "E-mailová adresa nevypadá správně.",
   "form.errSend": "Poptávku se nepodařilo odeslat. Zkuste nám prosím zavolat na +420 775 259 253.",
   "meta.title": "Parkovací místa k pronájmu — Praha 5, Štěpařská | Parking Štěpařská",
-  "meta.desc": "Pronájem parkovacích míst na hlídaném parkovišti u Albertu, Štěpařská 1098/22, Praha 5. Nonstop přístup, kamerový dohled, parkovací zábrany. Od 1 550 Kč měsíčně."
+  "meta.desc": "Pronájem parkovacích míst na parkovišti u Albertu, Štěpařská 1098/22, Praha 5. Nonstop přístup, kamerový dohled, parkovací zábrany. Od 1 550 Kč měsíčně."
 };
