@@ -25,10 +25,10 @@ window.I18N_EN = {
 
   /* Počet volných míst — {free} a {total} doplní web sám podle
      data-volnych v index.html. "few" = 2–4 místa, "many" = 5 a víc. */
-  "avail.0":    "Currently full — join the waiting list",
-  "avail.1":    "One space left out of {total}",
-  "avail.few":  "{free} of {total} spaces available",
-  "avail.many": "{free} of {total} spaces available",
+  "avail.0":    "*Currently full* — join the waiting list",
+  "avail.1":    "*One space left* out of {total}",
+  "avail.few":  "*{free} of {total}* spaces available",
+  "avail.many": "*{free} of {total}* spaces available",
 
   /* Texty, které se ukážou jen když je obsazeno (0 volných míst) */
   "cta.inquiry.full":   "Join the waiting list",
@@ -151,10 +151,10 @@ window.I18N_UA = {
 
   /* Кількість вільних місць. Українська відмінює так само як чеська:
      1 місце · 2–4 місця · 5 і більше місць. */
-  "avail.0":    "Наразі всі місця зайняті — запишіться в чергу",
-  "avail.1":    "Залишилось одне вільне місце з {total}",
-  "avail.few":  "Вільно {free} місця з {total}",
-  "avail.many": "Вільно {free} місць з {total}",
+  "avail.0":    "*Наразі всі місця зайняті* — запишіться в чергу",
+  "avail.1":    "*Залишилось одне вільне місце* з {total}",
+  "avail.few":  "*Вільно {free}* місця з {total}",
+  "avail.many": "*Вільно {free}* місць з {total}",
 
   /* Тексти, які показуються лише коли немає вільних місць */
   "cta.inquiry.full":   "Записатися в чергу",
@@ -256,10 +256,10 @@ window.I18N_UA = {
 window.I18N_CS_RUNTIME = {
   /* Počet volných míst. Čeština skloňuje, proto tři varianty:
      1 místo · 2–4 místa · 5 a více míst. */
-  "avail.0":    "Momentálně obsazeno — zapište se do pořadníku",
-  "avail.1":    "Poslední volné místo z {total}",
-  "avail.few":  "Volná {free} místa z {total}",
-  "avail.many": "Volných {free} míst z {total}",
+  "avail.0":    "*Momentálně obsazeno* — zapište se do pořadníku",
+  "avail.1":    "*Poslední volné místo* z {total}",
+  "avail.few":  "*Volná {free}* místa z {total}",
+  "avail.many": "*Volných {free}* míst z {total}",
 
   /* Texty, které se ukážou jen když je obsazeno (0 volných míst) */
   "cta.inquiry.full":   "Zapsat se do pořadníku",

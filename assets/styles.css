@@ -322,22 +322,51 @@ h3 { font-size: 1.12rem; }
   font-weight: 600;
   box-shadow: var(--shadow-sm);
 }
+/* Zvýrazněná část odznáčku (mezi hvězdičkami ve slovníku) */
+.badge__text strong { font-weight: 800; color: var(--brand-dark); }
+.badge--full .badge__text strong { color: var(--ink-2); }
+
+/* Odznáček se pomalu prodýchává, aby přitáhl oko k počtu volných míst.
+   Mění se jen podklad, rámeček a stín — průhlednost písma ne, takže
+   číslo zůstává čitelné po celou dobu. Blikající text, u kterého údaj
+   mizí, by se špatně četl a je i rizikový pro lidi s fotosenzitivní
+   epilepsií.
+   Kdo má v systému zapnuté omezení pohybu, animaci neuvidí — řeší to
+   pravidlo prefers-reduced-motion na konci souboru. */
+.badge { animation: dych 2.4s ease-in-out infinite; }
+@keyframes dych {
+  0%, 100% {
+    background: var(--bg);
+    border-color: var(--brand-tint-2);
+    box-shadow: var(--shadow-sm);
+  }
+  50% {
+    background: var(--brand-tint);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 4px rgba(14, 122, 82, .10);
+  }
+}
+
 .dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--brand);
   box-shadow: 0 0 0 3px var(--brand-tint);
-  animation: pulse 2.6s ease-in-out infinite;
+  animation: pulse 2.4s ease-in-out infinite;   /* stejný takt jako odznáček */
 }
 @keyframes pulse {
   0%, 100% { box-shadow: 0 0 0 3px var(--brand-tint); }
   50%      { box-shadow: 0 0 0 6px rgba(14, 122, 82, .10); }
 }
 
-/* Obsazeno — odznáček zšedne, aby nesliboval volná místa */
+/* Obsazeno — odznáček zšedne a znehybní. Upozorňovat na něco,
+   co stejně není k dispozici, by návštěvníka jen mátlo. */
 .badge--full {
   border-color: var(--line-2);
   color: var(--ink-2);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  animation: none;
 }
 .badge--full .dot {
   background: var(--ink-3);

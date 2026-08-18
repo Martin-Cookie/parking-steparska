@@ -114,7 +114,20 @@
       var txt = t(availKey())
         .replace("{free}", String(free))
         .replace("{total}", String(total));
-      $(".badge__text", availEl).textContent = txt;
+      // Část textu mezi hvězdičkami se vysází tučně. Skládáme to z uzlů,
+      // ne přes innerHTML — do stránky se tak nemůže dostat nic nečekaného.
+      var cil = $(".badge__text", availEl);
+      cil.textContent = "";
+      txt.split("*").forEach(function (usek, i) {
+        if (!usek) { return; }
+        if (i % 2) {
+          var b = doc.createElement("strong");
+          b.textContent = usek;
+          cil.appendChild(b);
+        } else {
+          cil.appendChild(doc.createTextNode(usek));
+        }
+      });
     }
     availEl.classList.toggle("badge--full", isFull);
 
