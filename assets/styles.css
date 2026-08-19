@@ -431,7 +431,9 @@ h3 { font-size: 1.12rem; }
   aspect-ratio: 4 / 3;
   transition: transform .5s cubic-bezier(.2, .7, .3, 1);
 }
-.frame--wide > img { aspect-ratio: 16 / 10; }
+/* Úvodní foto je na výšku, proto vyšší poměr — do 16:10 by se
+   nevešla cedule nahoře i parkovací zábrany dole zároveň. */
+.frame--wide > img { aspect-ratio: 5 / 4; }
 
 /* Zástupný stav, když foto ještě není nahrané */
 .frame.is-missing > img { display: none; }
@@ -449,7 +451,7 @@ h3 { font-size: 1.12rem; }
   font-size: .88rem;
   font-weight: 600;
 }
-.frame--wide.is-missing::after { aspect-ratio: 16 / 10; }
+.frame--wide.is-missing::after { aspect-ratio: 5 / 4; }
 
 /* --- Karty výhod --------------------------------------------------------- */
 
